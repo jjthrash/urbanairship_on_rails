@@ -12,21 +12,24 @@ class APN::Feedback < APN::Base
   #
   # MODEL STATE MACHINE
   #
-  acts_as_state_machine :initial => :pending, :column => 'state'
+  include AASM
 
-  state :pending
-  state :active
-  state :processed
+  aasm_column :state
+  aasm_initial_state :pending
 
-  event :pend do
+  aasm_state :pending
+  aasm_state :active
+  aasm_state :processed
+
+  aasm_event :pend do
     transitions :from => [:active, :processed], :to => :pending
   end
   
-  event :activate  do
+  aasm_event :activate  do
     transitions :from => [:pending, :processed], :to => :active
   end
 
-  event :process do
+  aasm_event :process do
     transitions :from => :active, :to => :processed
   end
     

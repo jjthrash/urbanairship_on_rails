@@ -24,16 +24,18 @@ class APN::Notification < APN::Base
   #
   # MODEL STATE MACHINE
   #
-  acts_as_state_machine :initial => :pending, :column => 'state'
+  include AASM
+  aasm_column :state
+  aasm_initial_state :pending
 
-  state :pending
-  state :processed, :enter=>:update_sent_at
+  aasm_state :pending
+  aasm_state :processed, :enter=>:update_sent_at
 
-  event :pend do
+  aasm_event :pend do
     transitions :from => :processed, :to => :pending
   end
   
-  event :process do
+  aasm_event :process do
     transitions :from => :active, :to => :processed
   end
       
