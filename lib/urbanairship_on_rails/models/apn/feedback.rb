@@ -1,4 +1,5 @@
 require 'json'
+require 'aasm'
 # 
 # Apple notifies UA when a notification is sent to a device that has push notifications enabled (for at least one application) 
 # but has turned off or uninstalled your application. We immediate stop sending notifications through to avoid angering Apple.

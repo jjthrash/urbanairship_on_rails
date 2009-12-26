@@ -1,3 +1,4 @@
+require 'aasm'
 # Represents the message you wish to send. 
 # An APN::Notification belongs to an APN::Device.
 # 
